@@ -2,6 +2,8 @@ name: Publish and release
 
 on:
   push:
+    # Tag pushes have no GitHub branch filter. The verify_main job below
+    # enforces that every release tag points to a commit contained in main.
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
 
