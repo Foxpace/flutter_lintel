@@ -102,4 +102,38 @@ $body
     // THEN
     await thenReportsNoDiagnostics(path);
   }
+
+  Future<void>
+  test_givenMultilineExpressionBodiedMethod_whenAnalyzed_thenReportsNoDiagnostic() async {
+    // GIVEN
+    final entries = List.filled(20, '    value,').join('\n');
+    final source =
+        '''
+class Values {
+  List<int> collect(int value) => [
+$entries
+  ];
+}
+''';
+    final path = givenLibFile('features/books/models/values.dart', source);
+
+    // THEN
+    await thenReportsNoDiagnostics(path);
+  }
+
+  Future<void>
+  test_givenMultilineExpressionBodiedFunction_whenAnalyzed_thenReportsNoDiagnostic() async {
+    // GIVEN
+    final entries = List.filled(20, '  value,').join('\n');
+    final source =
+        '''
+List<int> collect(int value) => [
+$entries
+];
+''';
+    final path = givenLibFile('features/books/use_cases/collect.dart', source);
+
+    // THEN
+    await thenReportsNoDiagnostics(path);
+  }
 }

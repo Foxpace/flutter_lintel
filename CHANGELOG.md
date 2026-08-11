@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.5
+
+- Exempt multiline expression-bodied functions and methods from
+  visual-grouping checks.
+
 ## 0.1.4
 
 - Allow a `StatefulWidget` and its private `State` implementation to share a

@@ -199,11 +199,15 @@ class _VisualGroupingVisitor extends SimpleAstVisitor<void> {
 
   @override
   void visitMethodDeclaration(MethodDeclaration node) {
-    if (node.name.lexeme != 'build') {
+    if (node.name.lexeme != 'build' && node.body is BlockFunctionBody) {
       _check(node);
     }
   }
 
   @override
-  void visitFunctionDeclaration(FunctionDeclaration node) => _check(node);
+  void visitFunctionDeclaration(FunctionDeclaration node) {
+    if (node.functionExpression.body is BlockFunctionBody) {
+      _check(node);
+    }
+  }
 }
