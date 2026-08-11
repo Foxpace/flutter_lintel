@@ -12,7 +12,7 @@ final class RuleLimits {
     classLines: 300,
     behaviorMethodLines: 30,
     buildMethodLines: 90,
-    functionLines: 90,
+    functionLines: 30,
     consecutiveNonblankLines: 15,
     parameters: 5,
     testLines: 25,

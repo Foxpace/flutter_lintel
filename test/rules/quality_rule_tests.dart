@@ -64,9 +64,9 @@ class MaintainabilityLimitsTest extends LintelAnalysisRuleTest {
   }
 
   Future<void>
-  test_givenOversizedCallable_whenAnalyzed_thenReportsDiagnostic() async {
+  test_givenTopLevelFunctionOverThirtyLines_whenAnalyzed_thenReportsDiagnostic() async {
     // GIVEN
-    final body = List.filled(89, '  step();').join('\n');
+    final body = List.filled(29, '  step();').join('\n');
     final source = 'void step() {}\nvoid work() {\n$body\n}\n';
     final path = givenLibFile(
       'features/books/use_cases/large_work.dart',
@@ -82,6 +82,21 @@ class MaintainabilityLimitsTest extends LintelAnalysisRuleTest {
       offset: start,
       length: source.length - 1 - start,
     );
+  }
+
+  Future<void>
+  test_givenTopLevelFunctionAtThirtyLines_whenAnalyzed_thenReportsNoDiagnostic() async {
+    // GIVEN
+    final body = List.filled(28, '  step();').join('\n');
+    final source = 'void step() {}\nvoid work() {\n$body\n}\n';
+    final path = givenLibFile(
+      'features/books/use_cases/large_work.dart',
+      source,
+    );
+
+    // WHEN
+    // THEN
+    await thenReportsNoDiagnostics(path);
   }
 
   Future<void>

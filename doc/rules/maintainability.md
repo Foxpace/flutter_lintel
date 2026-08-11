@@ -74,7 +74,7 @@ What it catches:
 | Class | 300 |
 | Non-`build` method | 30 |
 | `build` method | 90 |
-| Top-level function | 90 |
+| Top-level function | 30 |
 
 Test `main` functions are exempt from the callable limit.
 
@@ -148,7 +148,7 @@ limits:
   class_lines: 300
   behavior_method_lines: 30
   build_method_lines: 90
-  function_lines: 90
+  function_lines: 30
   consecutive_nonblank_lines: 15
   parameters: 5
   test_lines: 25

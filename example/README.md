@@ -48,6 +48,7 @@ limits:
   class_lines: 300
   behavior_method_lines: 30
   build_method_lines: 90
+  function_lines: 30
   consecutive_nonblank_lines: 15
   parameters: 5
   test_lines: 25

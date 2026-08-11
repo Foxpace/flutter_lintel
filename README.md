@@ -220,10 +220,10 @@ Diagnostic IDs are concise because they are already scoped by the
 ### Numeric limits
 
 The default maintainability profile limits files and classes to 300 lines,
-non-build methods to 30 lines, Flutter `build` methods to 90 lines, tests to 25
-lines, and uninterrupted non-UI callable phases to 15 nonblank lines. Function
-and parameter limits are configurable too. Constructors are limited by
-parameter count rather than line count.
+non-build methods and top-level functions to 30 lines, Flutter `build` methods
+to 90 lines, tests to 25 lines, and uninterrupted non-UI callable phases to 15
+nonblank lines. Function and parameter limits are configurable too.
+Constructors are limited by parameter count rather than line count.
 
 Create an optional `lintel.yaml` at the package or workspace root
 to override any numeric threshold:
@@ -234,7 +234,7 @@ limits:
   class_lines: 300
   behavior_method_lines: 30
   build_method_lines: 90
-  function_lines: 90
+  function_lines: 30
   consecutive_nonblank_lines: 15
   parameters: 5
   test_lines: 25
