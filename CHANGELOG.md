@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.4
+
+- Allow a `StatefulWidget` and its private `State` implementation to share a
+  file without requiring the widget class to match the filename.
+
 ## 0.1.3
 
 - Exempt Flutter `build` methods from visual-grouping checks while retaining

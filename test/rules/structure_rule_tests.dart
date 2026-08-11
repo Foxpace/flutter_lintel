@@ -65,18 +65,37 @@ class WidgetFileCohesionTest extends LintelAnalysisRuleTest {
   }
 
   Future<void>
-  test_givenMismatchedWidgetFileName_whenAnalyzed_thenReportsDiagnostic() async {
+  test_givenWidgetAndItsState_whenAnalyzed_thenReportsNoDiagnostic() async {
+    // GIVEN
+    const source = '''
+class StatefulWidget {}
+class State<T> {}
+class PlayerTestScreenHarness extends StatefulWidget {}
+class _PlayerTestScreenHarnessState extends State<PlayerTestScreenHarness> {}
+''';
+    final path = givenLibFile(
+      'features/player/ui/player_widget_test_harness.dart',
+      source,
+    );
+
+    // THEN
+    await thenReportsNoDiagnostics(path);
+  }
+
+  Future<void>
+  test_givenTwoPublicWidgets_whenAnalyzed_thenReportsDiagnostic() async {
     // GIVEN
     const source = '''
 class StatelessWidget {}
-class BooksView extends StatelessWidget {}
+class LibraryScreen extends StatelessWidget {}
+class BookTile extends StatelessWidget {}
 ''';
-    final path = givenLibFile('features/books/ui/wrong_name.dart', source);
+    final path = givenLibFile('features/books/ui/library.dart', source);
 
     // WHEN
-    final offset = source.indexOf('BooksView');
+    final offset = source.indexOf('BookTile');
 
     // THEN
-    await thenReportsLint(path, offset: offset, length: 'BooksView'.length);
+    await thenReportsLint(path, offset: offset, length: 'BookTile'.length);
   }
 }

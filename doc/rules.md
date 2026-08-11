@@ -61,4 +61,4 @@ architecture profile and use package-specific diagnostics.
 | [`use_case_umbrella`](rules/state-intents-and-application.md#use_case_umbrella) | Public raw collaborators exposed by a `*UseCases` umbrella. |
 | [`visual_grouping`](rules/maintainability.md#visual_grouping) | Non-UI callables above the configured consecutive-nonblank-line limit. |
 | [`widget_dispatches_intents_only`](rules/state-intents-and-application.md#widget_dispatches_intents_only) | UI code coupled directly to Cubits, routing, DI, filesystem, or Bloc subscriptions. |
-| [`widget_file_cohesion`](rules/structure-and-ownership.md#widget_file_cohesion) | Multiple public widgets in one file or a widget/file-name mismatch. |
+| [`widget_file_cohesion`](rules/structure-and-ownership.md#widget_file_cohesion) | Multiple public widgets in one file. |

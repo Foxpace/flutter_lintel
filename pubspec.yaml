@@ -1,6 +1,6 @@
 name: lintel
 description: Analyzer plugin that enforces cohesive Flutter application architecture.
-version: 0.1.3
+version: 0.1.4
 
 homepage: https://github.com/Foxpace/flutter_lintel
 repository: https://github.com/Foxpace/flutter_lintel

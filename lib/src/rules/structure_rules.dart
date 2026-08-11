@@ -182,13 +182,13 @@ class _SingleCubitRootVisitor extends SimpleAstVisitor<void> {
   }
 }
 
-/// Reports public widget declarations that do not match their file boundary.
+/// Reports files that expose more than one public widget declaration.
 ///
 /// See the [rule documentation](../../../doc/rules/structure-and-ownership.md#widget_file_cohesion).
 class WidgetFileCohesion extends GuardRule {
   static final LintCode code = warningCode(
     'widget_file_cohesion',
-    'A widget file must expose one public widget whose name matches the file.',
+    'A widget file must expose at most one public widget.',
     'Split independent widgets into snake_case files with one public widget each.',
   );
 
@@ -225,14 +225,6 @@ class _WidgetCohesionVisitor extends SimpleAstVisitor<void> {
     }).toList();
     if (widgets.length > 1) {
       rule.reportAtToken(widgets[1].namePart.beginToken);
-      return;
-    }
-    if (widgets.length == 1) {
-      final fileName = path.split('/').last;
-      final widgetName = widgets.single.namePart.beginToken;
-      if (fileName != '${snakeCase(widgetName.lexeme)}.dart') {
-        rule.reportAtToken(widgetName);
-      }
     }
   }
 }

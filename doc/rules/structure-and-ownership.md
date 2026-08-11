@@ -154,8 +154,8 @@ prohibit mixins; it only asks each public type to have an explicit home.
 ## `widget_file_cohesion`
 
 What it catches: more than one public `StatelessWidget` or `StatefulWidget` in
-a handwritten file, or a public widget whose class name does not match the
-snake_case filename. `lib/main.dart` is exempt from the name check.
+a handwritten file. A `StatefulWidget` and its private `State` implementation
+form one cohesive widget and may live in the same file.
 
 Bad — `library.dart`:
 
@@ -168,6 +168,7 @@ class BookTile extends StatelessWidget {
   const BookTile({super.key});
 }
 ```
+
 
 Good — `library_screen.dart`:
 
@@ -184,4 +185,3 @@ class BookTile extends StatelessWidget {
   const BookTile({super.key});
 }
 ```
-
