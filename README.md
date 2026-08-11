@@ -36,8 +36,8 @@ correctness, but they do not know the boundaries of your application.
 - handwritten files, declarations, and callables stay focused;
 - test groups describe a shared intention, while each test uses Given/When/Then
   in its description and body phases;
-- unsafe shortcuts such as explicit `dynamic` and non-null assertions are
-  rejected.
+- unsafe shortcuts such as unconstrained explicit `dynamic` and non-null
+  assertions are rejected.
 
 ## What it catches
 
@@ -103,22 +103,22 @@ class LibraryCubit extends Cubit<LibraryState> {
 Cross-feature coordination belongs in a composition root. Shared behavior
 belongs behind an explicit application or domain contract.
 
-### Make boundaries statically typed
+### Keep dynamic data at JSON boundaries
 
 Bad:
 
 ```dart
-Object? readValue(Map<String, dynamic> json) => json['value'];
+dynamic readValue(Object? value) => value;
 ```
 
 Good:
 
 ```dart
-Object? readValue(Map<String, Object?> json) => json['value'];
+Object? readValue(Map<String, dynamic> json) => json['value'];
 ```
 
-Validate boundary values and convert them into typed models before they reach
-use cases or state holders.
+`Map<String, dynamic>` is accepted for JSON parsing. Validate its values and
+convert them into typed models before they reach use cases or state holders.
 
 ### Keep error handling focused
 
@@ -222,8 +222,9 @@ Diagnostic IDs are concise because they are already scoped by the
 The default maintainability profile limits files and classes to 300 lines,
 non-build methods and top-level functions to 30 lines, Flutter `build` methods
 to 90 lines, tests to 25 lines, and uninterrupted non-UI callable phases to 15
-nonblank lines. Function and parameter limits are configurable too.
-Constructors are limited by parameter count rather than line count.
+nonblank lines. Function and parameter limits are configurable too. Behavior
+constructors are limited by parameter count; data-class constructors are
+exempt and remain governed by the separate Freezed rule.
 
 Create an optional `lintel.yaml` at the package or workspace root
 to override any numeric threshold:
@@ -339,9 +340,9 @@ dart test
 ```
 
 Group tests by intention. Test descriptions should contain Given, When, and
-Then; nonempty bodies should mark the same phases with comments. Keep each test
-at 25 lines or fewer and include both reporting and allowed cases for every new
-diagnostic.
+Then; nonempty bodies should mark only the phases that contain code, in order.
+Keep each test at 25 lines or fewer and include both reporting and allowed
+cases for every new diagnostic.
 
 ## License
 

@@ -39,6 +39,24 @@ bool isCompositionRoot(String path) => path.endsWith('_root.dart');
 bool isCubit(ClassDeclaration node) =>
     node.extendsClause?.superclass.toSource().startsWith('Cubit<') ?? false;
 
+bool isDataOnlyClass(ClassDeclaration node) {
+  final body = node.body;
+  if (body is! BlockClassBody ||
+      node.namePart.beginToken.lexeme.endsWith('UseCases')) {
+    return false;
+  }
+  final hasFields = body.members.whereType<FieldDeclaration>().any(
+    (field) => !field.isStatic,
+  );
+  final hasConstructorData = body.members
+      .whereType<ConstructorDeclaration>()
+      .any((constructor) => constructor.parameters.parameters.isNotEmpty);
+  final hasBehavior = body.members.whereType<MethodDeclaration>().any(
+    (method) => !method.isGetter,
+  );
+  return (hasFields || hasConstructorData) && !hasBehavior;
+}
+
 ClassDeclaration? enclosingClass(AstNode node) {
   AstNode? current = node.parent;
   while (current != null) {

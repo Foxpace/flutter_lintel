@@ -32,7 +32,6 @@ class FileLineCountTest extends LintelAnalysisRuleTest {
     final source = List.filled(300, '// line').join('\n');
     final path = givenLibFile('features/books/models/allowed.dart', source);
 
-    // WHEN
     // THEN
     await thenReportsNoDiagnostics(path);
   }
@@ -94,7 +93,6 @@ class MaintainabilityLimitsTest extends LintelAnalysisRuleTest {
       source,
     );
 
-    // WHEN
     // THEN
     await thenReportsNoDiagnostics(path);
   }
@@ -136,7 +134,6 @@ class MaintainabilityLimitsTest extends LintelAnalysisRuleTest {
     final source = 'void step() {}\nclass Worker {\n$method\n}\n';
     final path = givenLibFile('features/books/use_cases/worker.dart', source);
 
-    // WHEN
     // THEN
     await thenReportsNoDiagnostics(path);
   }
@@ -163,9 +160,6 @@ class MaintainabilityLimitsTest extends LintelAnalysisRuleTest {
     final method = 'void build() {\n$body\n}';
     final source = 'void step() {}\nclass View {\n$method\n}\n';
     final path = givenLibFile('features/books/ui/view.dart', source);
-
-    // WHEN
-    // The build method is exactly at the default limit.
 
     // THEN
     await thenReportsNoDiagnostics(path);
@@ -235,7 +229,6 @@ limits:
     final source = 'class Worker {\nvoid step() {}\n$constructor\n}\n';
     final path = givenLibFile('features/books/models/worker.dart', source);
 
-    // WHEN
     // THEN
     await thenReportsNoDiagnostics(path);
   }

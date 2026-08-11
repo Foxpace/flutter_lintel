@@ -42,9 +42,6 @@ void main() => test('Given books, When loaded, Then they appear', () {});
 ''';
     final path = givenTestFile('books_test.dart', source);
 
-    // WHEN
-    // The description rule analyzes the complete behavior sentence.
-
     // THEN
     await thenReportsNoDiagnostics(path);
   }
@@ -86,9 +83,6 @@ void group(String n, void Function() b) {}
 void main() => group('Book loading', () {});
 ''';
     final path = givenTestFile('books_test.dart', source);
-
-    // WHEN
-    // The group rule analyzes an intention-based name.
 
     // THEN
     await thenReportsNoDiagnostics(path);
@@ -139,11 +133,50 @@ void main() => test('Given a value, When checked, Then it passes', () {
 ''';
     final path = givenTestFile('value_test.dart', source);
 
-    // WHEN
-    // The comment rule analyzes all ordered phase markers.
+    // THEN
+    await thenReportsNoDiagnostics(path);
+  }
+
+  Future<void>
+  test_givenNoActionPhase_whenAnalyzed_thenAllowsGivenAndThenComments() async {
+    // GIVEN
+    const source = '''
+void test(String n, void Function() b) {}
+void main() => test('Given a value, When checked, Then it passes', () {
+  // GIVEN
+  final value = 1;
+  // THEN
+  assert(value == 1);
+});
+''';
+    final path = givenTestFile('value_test.dart', source);
 
     // THEN
     await thenReportsNoDiagnostics(path);
+  }
+
+  Future<void>
+  test_givenEmptyActionPhase_whenAnalyzed_thenReportsDiagnostic() async {
+    // GIVEN
+    const source = '''
+void test(String n, void Function() b) {}
+void main() => test('Given a value, When checked, Then it passes', () {
+  // GIVEN
+  final value = 1;
+  // WHEN
+  // THEN
+  assert(value == 1);
+});
+''';
+    final path = givenTestFile('value_test.dart', source);
+    const description = '\'Given a value, When checked, Then it passes\'';
+
+    // THEN
+    await thenReportsLint(
+      path,
+      offset: source.indexOf(description),
+      length: description.length,
+    );
   }
 }
 
@@ -177,9 +210,6 @@ class TestLineCountTest extends LintelAnalysisRuleTest {
     // GIVEN
     final source = _reflectiveTestSource(23);
     final path = givenTestFile('focused_test.dart', source);
-
-    // WHEN
-    // The line rule analyzes a test exactly at the default limit.
 
     // THEN
     await thenReportsNoDiagnostics(path);

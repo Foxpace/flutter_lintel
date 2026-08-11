@@ -83,23 +83,25 @@ allowed; they are ordinary Dart language features.
 
 ## `no_dynamic`
 
-What it catches: every explicit `dynamic` type annotation in handwritten Dart,
+What it catches: explicit `dynamic` type annotations in handwritten Dart,
 including parameters, return types, variables, records, and generic arguments.
+The value type in `Map<String, dynamic>` is exempt so JSON objects can use the
+standard flexible boundary shape.
 
 Bad:
 
 ```dart
-Object? readValue(Map<String, dynamic> json) => json['value'];
+Object? firstValue(List<dynamic> values) => values.first;
 ```
 
 Good:
 
 ```dart
-Object? readValue(Map<String, Object?> json) => json['value'];
+Object? readValue(Map<String, dynamic> json) => json['value'];
 ```
 
-At application boundaries, validate `Object?` values and convert them into
-typed models before passing them into use cases or Cubits.
+After parsing, validate map values and convert them into typed models before
+passing them into use cases or Cubits.
 
 ## `no_empty_test_groups`
 
@@ -315,7 +317,9 @@ operations explicit names.
 ## `test_body_uses_given_when_then_comments`
 
 What it catches: nonempty `test`, `testWidgets`, and reflective `test_*` bodies
-without ordered `// GIVEN`, `// WHEN`, and `// THEN` phase comments.
+without meaningful, ordered `// GIVEN`, `// WHEN`, or `// THEN` phase comments.
+Only phases that contain code should be marked; for example, omit `// WHEN`
+when a test performs setup followed directly by an assertion.
 
 Bad:
 
@@ -341,6 +345,7 @@ test('Given a book, When opened, Then it is selected', () {
 ```
 
 Empty test callbacks are exempt because no phases are present to label.
+Empty phase markers are rejected.
 
 ## `test_descriptions_use_given_when_then`
 

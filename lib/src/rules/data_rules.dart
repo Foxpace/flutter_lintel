@@ -194,25 +194,10 @@ class _DataClassVisitor extends SimpleAstVisitor<void> {
     if (path == null || !path.startsWith('lib/') || isGeneratedPath(path)) {
       return;
     }
-    final body = node.body;
-    if (body is! BlockClassBody ||
-        node.namePart.beginToken.lexeme.endsWith('UseCases')) {
-      return;
-    }
-    final fields = body.members.whereType<FieldDeclaration>().where(
-      (field) => !field.isStatic,
-    );
-    final hasConstructorData = body.members
-        .whereType<ConstructorDeclaration>()
-        .any((constructor) => constructor.parameters.parameters.isNotEmpty);
-    final hasBehavior = body.members.whereType<MethodDeclaration>().any(
-      (method) => !method.isGetter,
-    );
-    final dataOnly = (fields.isNotEmpty || hasConstructorData) && !hasBehavior;
     final freezed = node.metadata.any(
       (annotation) => annotation.name.toSource() == 'freezed',
     );
-    if (dataOnly && !freezed) {
+    if (isDataOnlyClass(node) && !freezed) {
       rule.reportAtToken(node.namePart.beginToken);
     }
   }

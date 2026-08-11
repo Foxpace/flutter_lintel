@@ -17,8 +17,25 @@ class NoDynamicTest extends LintelAnalysisRuleTest {
   test_givenDynamicTypeArgument_whenAnalyzed_thenReportsDiagnostic() async {
     // GIVEN
     const source = '''
-Object? read(Map<String, dynamic> json) => json['value'];
+Object? read(List<dynamic> values) => values.first;
 ''';
+    final path = givenLibFile('core/read.dart', source);
+
+    // WHEN
+    const type = 'dynamic';
+
+    // THEN
+    await thenReportsLint(
+      path,
+      offset: source.indexOf(type),
+      length: type.length,
+    );
+  }
+
+  Future<void>
+  test_givenDynamicMapWithNonStringKeys_whenAnalyzed_thenReportsDiagnostic() async {
+    // GIVEN
+    const source = 'Object? read(Map<int, dynamic> values) => values[0];';
     final path = givenLibFile('core/read.dart', source);
 
     // WHEN
@@ -46,6 +63,21 @@ class NoDynamicAllowedTest extends LintelAnalysisRuleTest {
     // GIVEN
     const source = '''
 Object? read(Map<String, Object?> json) => json['value'];
+''';
+    final path = givenLibFile('core/read.dart', source);
+
+    // WHEN
+    final analyzedPath = path;
+
+    // THEN
+    await thenReportsNoDiagnostics(analyzedPath);
+  }
+
+  Future<void>
+  test_givenStringDynamicJsonMap_whenAnalyzed_thenReportsNoDiagnostic() async {
+    // GIVEN
+    const source = '''
+Object? read(Map<String, dynamic> json) => json['value'];
 ''';
     final path = givenLibFile('core/read.dart', source);
 

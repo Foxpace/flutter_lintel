@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.3
+
+- Exempt Flutter `build` methods from visual-grouping checks while retaining
+  their separate size limit.
+- Allow `Map<String, dynamic>` at JSON boundaries while continuing to reject
+  other explicit `dynamic` types.
+- Exempt data-only class constructors from parameter-count limits.
+- Allow tests to omit phases with no code and reject empty phase markers.
+
 ## 0.1.2
 
 - Fix the default top-level function limit to 30 lines so it matches the

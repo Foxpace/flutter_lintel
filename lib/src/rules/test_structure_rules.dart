@@ -9,14 +9,14 @@ import 'package:lintel/src/rules/base.dart';
 
 part 'test_structure_rule_support.dart';
 
-/// Reports nonempty tests without ordered Given/When/Then phase comments.
+/// Reports missing, empty, or unordered test phase comments.
 ///
 /// See the [rule documentation](../../../doc/rules/testing-errors-and-correctness.md#test_body_uses_given_when_then_comments).
 class TestBodyUsesGivenWhenThenComments extends GuardRule {
   static final LintCode code = warningCode(
     'test_body_uses_given_when_then_comments',
-    'A nonempty test must mark its Given, When, and Then phases in order.',
-    'Add // GIVEN, // WHEN, and // THEN comments around the test phases.',
+    'A nonempty test must mark each meaningful phase in order.',
+    'Use ordered // GIVEN, // WHEN, or // THEN comments only for phases that contain code.',
   );
 
   TestBodyUsesGivenWhenThenComments()
@@ -125,7 +125,7 @@ class _TestCommentVisitor extends SimpleAstVisitor<void> {
 
   bool _isInvalid(FunctionBody body) =>
       _isNonemptyBody(body) &&
-      !_hasOrderedPhaseComments(_source(body, context));
+      !_hasMeaningfulOrderedPhaseComments(_source(body, context));
 
   @override
   void visitMethodDeclaration(MethodDeclaration node) {

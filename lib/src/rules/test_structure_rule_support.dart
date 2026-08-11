@@ -69,16 +69,36 @@ String _source(AstNode node, RuleContext context) {
   return content.substring(node.offset, node.end);
 }
 
-bool _hasOrderedPhaseComments(String source) {
-  var offset = 0;
-  for (final phase in const ['GIVEN', 'WHEN', 'THEN']) {
-    final match = RegExp(
-      '//\\s*$phase\\b',
-    ).firstMatch(source.substring(offset));
-    if (match == null) {
+bool _hasMeaningfulOrderedPhaseComments(String source) {
+  final matches = RegExp(
+    r'//\s*(GIVEN|WHEN|THEN)\b',
+  ).allMatches(source).toList();
+  if (matches.isEmpty) {
+    return false;
+  }
+
+  const order = {'GIVEN': 0, 'WHEN': 1, 'THEN': 2};
+  var previous = -1;
+  for (var index = 0; index < matches.length; index++) {
+    final current = order[matches[index].group(1)]!;
+    if (current <= previous) {
       return false;
     }
-    offset += match.end;
+    previous = current;
+
+    final end = index + 1 < matches.length
+        ? matches[index + 1].start
+        : source.length;
+    if (!_containsTestCode(source.substring(matches[index].end, end))) {
+      return false;
+    }
   }
   return true;
+}
+
+bool _containsTestCode(String source) {
+  final withoutComments = source
+      .replaceAll(RegExp(r'/\*[\s\S]*?\*/'), '')
+      .replaceAll(RegExp(r'//[^\n]*'), '');
+  return withoutComments.replaceAll(RegExp(r'[\s{}]'), '').isNotEmpty;
 }

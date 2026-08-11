@@ -6,7 +6,7 @@ import 'package:analyzer/error/error.dart';
 import 'package:lintel/src/rule_utils.dart';
 import 'package:lintel/src/rules/base.dart';
 
-/// Reports explicit `dynamic` types in handwritten Dart code.
+/// Reports explicit `dynamic` types outside `Map<String, dynamic>`.
 ///
 /// See the [rule documentation](../../../doc/rules/testing-errors-and-correctness.md#no_dynamic).
 class NoDynamic extends GuardRule {
@@ -40,9 +40,26 @@ class _DynamicTypeVisitor extends SimpleAstVisitor<void> {
     final path = currentPath(context);
     if (path != null &&
         isHandwrittenDartPath(path) &&
-        node.name.lexeme == 'dynamic') {
+        node.name.lexeme == 'dynamic' &&
+        !_isStringDynamicMapValue(node)) {
       rule.reportAtToken(node.name);
     }
+  }
+
+  bool _isStringDynamicMapValue(NamedType node) {
+    final typeArguments = node.parent;
+    if (typeArguments is! TypeArgumentList ||
+        typeArguments.arguments.length != 2 ||
+        !identical(typeArguments.arguments[1], node)) {
+      return false;
+    }
+
+    final mapType = typeArguments.parent;
+    final keyType = typeArguments.arguments.first;
+    return mapType is NamedType &&
+        mapType.name.lexeme == 'Map' &&
+        keyType is NamedType &&
+        keyType.name.lexeme == 'String';
   }
 }
 

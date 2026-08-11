@@ -135,9 +135,6 @@ mixin SharedHelpers {}
 ''';
     final path = givenLibFile('shared/helpers.dart', source);
 
-    // WHEN
-    // The compatibility rule analyzes the valid part and mixin declaration.
-
     // THEN
     await thenReportsNoDiagnostics(path);
   }

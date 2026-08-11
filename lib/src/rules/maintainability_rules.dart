@@ -198,7 +198,12 @@ class _VisualGroupingVisitor extends SimpleAstVisitor<void> {
   }
 
   @override
-  void visitMethodDeclaration(MethodDeclaration node) => _check(node);
+  void visitMethodDeclaration(MethodDeclaration node) {
+    if (node.name.lexeme != 'build') {
+      _check(node);
+    }
+  }
+
   @override
   void visitFunctionDeclaration(FunctionDeclaration node) => _check(node);
 }

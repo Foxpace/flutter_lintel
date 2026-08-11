@@ -90,16 +90,28 @@ limits:
   test_givenConstructorWithSixParameters_whenAnalyzed_thenReportsDiagnostic() async {
     // GIVEN
     const parameters = '(int a, int b, int c, int d, int e, int f)';
-    const source = 'class Worker { Worker$parameters; }';
+    const source = 'class Worker { Worker$parameters; void run() {} }';
     final path = givenLibFile('features/books/models/worker.dart', source);
 
-    // WHEN
     // THEN
     await thenReportsLint(
       path,
       offset: source.indexOf(parameters),
       length: parameters.length,
     );
+  }
+
+  Future<void>
+  test_givenDataClassWithManyParameters_whenAnalyzed_thenReportsNoDiagnostic() async {
+    // GIVEN
+    const parameters =
+        '({String? time, String? operation, String? errorType, String? stack, String? platform, String? platformVersion, String? build, String? message, Map<String, String>? context, List<String>? history, List<String>? diagnostics})';
+    const source =
+        'class AppError { const factory AppError$parameters = _AppError; } class _AppError implements AppError { const _AppError$parameters; }';
+    final path = givenLibFile('features/errors/models/app_error.dart', source);
+
+    // THEN
+    await thenReportsNoDiagnostics(path);
   }
 }
 

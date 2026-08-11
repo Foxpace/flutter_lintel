@@ -150,7 +150,6 @@ class BookCubit extends Cubit<State> {
 ''';
     final path = givenLibFile('features/books/cubits/book_cubit.dart', source);
 
-    // WHEN
     // THEN
     await thenReportsNoDiagnostics(path);
   }

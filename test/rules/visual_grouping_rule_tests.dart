@@ -38,7 +38,6 @@ class VisualGroupingTest extends LintelAnalysisRuleTest {
     final source = 'void step() {}\nvoid work() {\n$body\n}\n';
     final path = givenLibFile('features/books/use_cases/work.dart', source);
 
-    // WHEN
     // THEN
     await thenReportsNoDiagnostics(path);
   }
@@ -80,7 +79,26 @@ $body
 ''';
     final path = givenLibFile('features/books/models/worker.dart', source);
 
-    // WHEN
+    // THEN
+    await thenReportsNoDiagnostics(path);
+  }
+
+  Future<void>
+  test_givenLongUnbrokenBuildMethod_whenAnalyzed_thenReportsNoDiagnostic() async {
+    // GIVEN
+    final body = List.filled(20, '    step();').join('\n');
+    final source =
+        '''
+class BookView {
+  void build() {
+$body
+  }
+
+  void step() {}
+}
+''';
+    final path = givenLibFile('features/books/models/book_view.dart', source);
+
     // THEN
     await thenReportsNoDiagnostics(path);
   }

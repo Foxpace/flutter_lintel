@@ -28,7 +28,9 @@ disable file size independently from class and callable size checks.
 
 What it catches: constructors, functions, and methods with more than five
 parameters by default. Constructor size is intentionally measured by inputs,
-not source lines. Generated files and `copyWith` declarations are ignored.
+not source lines. Data-class constructors, generated files, and `copyWith`
+declarations are ignored. The separate `data_class_uses_freezed` rule governs
+whether data-only classes use Freezed.
 
 Bad:
 
@@ -106,6 +108,8 @@ Cubit rather than moving it into stateful services.
 What it catches: methods and functions in non-UI production code with more
 than 15 consecutive nonblank lines by default. UI,
 presentation, theme, navigation, roots, and presenters are excluded.
+Flutter `build` methods are also exempt because their size is governed
+separately by `maintainability_limits`.
 
 Bad:
 

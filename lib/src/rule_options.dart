@@ -88,10 +88,10 @@ final class RuleLimits {
   /// Maximum lines in a top-level function.
   final int functionLines;
 
-  /// Maximum consecutive nonblank lines in a non-UI callable.
+  /// Maximum consecutive nonblank lines in a non-UI, non-build callable.
   final int consecutiveNonblankLines;
 
-  /// Maximum parameters on a constructor or callable.
+  /// Maximum parameters on a behavior constructor or callable.
   final int parameters;
 
   /// Maximum lines in one test declaration.

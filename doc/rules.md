@@ -32,13 +32,13 @@ architecture profile and use package-specific diagnostics.
 | [`emit_new_state_instances`](rules/bloc-and-cubit.md#emit_new_state_instances) | `emit(state)` calls that reuse the current state instance. |
 | [`feature_layout`](rules/structure-and-ownership.md#feature_layout) | Feature folders that do not expose the standard feature structure and a composition root. |
 | [`file_line_count`](rules/maintainability.md#file_line_count) | Handwritten Dart files beyond the configured project limit. |
-| [`long_parameter_list`](rules/maintainability.md#long_parameter_list) | Constructors and callables with more than five parameters. |
+| [`long_parameter_list`](rules/maintainability.md#long_parameter_list) | Behavior constructors and callables with more than five parameters. |
 | [`maintainability_limits`](rules/maintainability.md#maintainability_limits) | Oversized classes, methods, or functions. |
 | [`no_assignments_in_conditions`](rules/testing-errors-and-correctness.md#no_assignments_in_conditions) | Assignment expressions embedded in `if`, `while`, or `do` conditions. |
 | [`no_bloc_to_bloc_dependencies`](rules/bloc-and-cubit.md#no_bloc_to_bloc_dependencies) | Bloc or Cubit fields whose type is another state holder. |
 | [`no_build_context_in_bloc`](rules/bloc-and-cubit.md#no_build_context_in_bloc) | `BuildContext` types inside Blocs, Cubits, or event classes. |
 | [`no_compatibility_shims`](rules/testing-errors-and-correctness.md#no_compatibility_shims) | Deprecated APIs and incomplete test fakes. |
-| [`no_dynamic`](rules/testing-errors-and-correctness.md#no_dynamic) | Explicit `dynamic` types in handwritten Dart code. |
+| [`no_dynamic`](rules/testing-errors-and-correctness.md#no_dynamic) | Explicit `dynamic` types outside `Map<String, dynamic>` in handwritten Dart code. |
 | [`no_empty_test_groups`](rules/testing-errors-and-correctness.md#no_empty_test_groups) | Test groups that contain no `test` or `testWidgets` invocation. |
 | [`no_enum_values_by_index`](rules/testing-errors-and-correctness.md#no_enum_values_by_index) | Enum values selected by unstable positional index. |
 | [`no_global_mutable_state`](rules/testing-errors-and-correctness.md#no_global_mutable_state) | Mutable top-level variables in handwritten library code. |
@@ -54,7 +54,7 @@ architecture profile and use package-specific diagnostics.
 | [`single_operation_try_blocks`](rules/testing-errors-and-correctness.md#single_operation_try_blocks) | `try` or `catch` blocks containing multiple top-level operations. |
 | [`single_public_declaration_per_file`](rules/structure-and-ownership.md#single_public_declaration_per_file) | Multiple public type declarations in one handwritten file. |
 | [`stateless_application_service`](rules/state-intents-and-application.md#stateless_application_service) | Mutable fields retained by application services in `use_cases/`. |
-| [`test_body_uses_given_when_then_comments`](rules/testing-errors-and-correctness.md#test_body_uses_given_when_then_comments) | Nonempty tests without ordered Given/When/Then phase comments. |
+| [`test_body_uses_given_when_then_comments`](rules/testing-errors-and-correctness.md#test_body_uses_given_when_then_comments) | Nonempty tests with missing, empty, or unordered phase comments. |
 | [`test_descriptions_use_given_when_then`](rules/testing-errors-and-correctness.md#test_descriptions_use_given_when_then) | Tests whose descriptions do not state Given, When, and Then in order. |
 | [`test_groups_describe_intention`](rules/testing-errors-and-correctness.md#test_groups_describe_intention) | Test groups named after scenario phases instead of a shared intention. |
 | [`test_line_count`](rules/testing-errors-and-correctness.md#test_line_count) | Tests beyond the configured line limit. |

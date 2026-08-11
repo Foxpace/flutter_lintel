@@ -8,7 +8,7 @@ import 'package:lintel/src/rule_options.dart';
 import 'package:lintel/src/rule_utils.dart';
 import 'package:lintel/src/rules/base.dart';
 
-/// Reports constructors and callables above the configured parameter limit.
+/// Reports behavior constructors and callables above the parameter limit.
 ///
 /// See the [rule documentation](../../../doc/rules/maintainability.md#long_parameter_list).
 class LongParameterList extends GuardRule {
@@ -60,8 +60,12 @@ class _LongParameterVisitor extends SimpleAstVisitor<void> {
   }
 
   @override
-  void visitConstructorDeclaration(ConstructorDeclaration node) =>
+  void visitConstructorDeclaration(ConstructorDeclaration node) {
+    final owner = enclosingClass(node);
+    if (owner == null || !isDataOnlyClass(owner)) {
       _check(node.parameters);
+    }
+  }
 
   @override
   void visitFunctionDeclaration(FunctionDeclaration node) =>
