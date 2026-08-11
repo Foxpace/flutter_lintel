@@ -1,12 +1,12 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:flutter_arch_guard/src/rules/maintainability_rules.dart';
+import 'package:lintel/src/rules/maintainability_rules.dart';
 import 'package:test_reflective_loader/test_reflective_loader.dart';
 
-import '../support/flutter_arch_analysis_rule_harness.dart';
+import '../support/lintel_analysis_rule_harness.dart';
 
 @reflectiveTest
-class VisualGroupingTest extends FlutterArchAnalysisRuleTest {
+class VisualGroupingTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = VisualGrouping();

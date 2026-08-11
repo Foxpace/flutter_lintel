@@ -1,7 +1,7 @@
 /// Analyzer-plugin entry point loaded by the Dart Analysis Server.
 library;
 
-import 'package:flutter_arch_guard/src/flutter_arch_guard_plugin.dart';
+import 'package:lintel/src/lintel_plugin.dart';
 
 /// The plugin instance discovered by the Dart Analysis Server.
-final plugin = FlutterArchGuardPlugin();
+final plugin = LintelPlugin();

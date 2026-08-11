@@ -1,12 +1,12 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:flutter_arch_guard/src/rules/test_structure_rules.dart';
+import 'package:lintel/src/rules/test_structure_rules.dart';
 import 'package:test_reflective_loader/test_reflective_loader.dart';
 
-import '../support/flutter_arch_analysis_rule_harness.dart';
+import '../support/lintel_analysis_rule_harness.dart';
 
 @reflectiveTest
-class TestDescriptionsUseGivenWhenThenTest extends FlutterArchAnalysisRuleTest {
+class TestDescriptionsUseGivenWhenThenTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = TestDescriptionsUseGivenWhenThen();
@@ -51,7 +51,7 @@ void main() => test('Given books, When loaded, Then they appear', () {});
 }
 
 @reflectiveTest
-class TestGroupsDescribeIntentionTest extends FlutterArchAnalysisRuleTest {
+class TestGroupsDescribeIntentionTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = TestGroupsDescribeIntention();
@@ -96,8 +96,7 @@ void main() => group('Book loading', () {});
 }
 
 @reflectiveTest
-class TestBodyUsesGivenWhenThenCommentsTest
-    extends FlutterArchAnalysisRuleTest {
+class TestBodyUsesGivenWhenThenCommentsTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = TestBodyUsesGivenWhenThenComments();
@@ -149,7 +148,7 @@ void main() => test('Given a value, When checked, Then it passes', () {
 }
 
 @reflectiveTest
-class TestLineCountTest extends FlutterArchAnalysisRuleTest {
+class TestLineCountTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = TestLineCount();

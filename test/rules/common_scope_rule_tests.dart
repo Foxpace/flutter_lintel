@@ -1,12 +1,12 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:flutter_arch_guard/src/rules/common_scope_rules.dart';
+import 'package:lintel/src/rules/common_scope_rules.dart';
 import 'package:test_reflective_loader/test_reflective_loader.dart';
 
-import '../support/flutter_arch_analysis_rule_harness.dart';
+import '../support/lintel_analysis_rule_harness.dart';
 
 @reflectiveTest
-class NoGlobalMutableStateTest extends FlutterArchAnalysisRuleTest {
+class NoGlobalMutableStateTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoGlobalMutableState();
@@ -34,7 +34,7 @@ var currentBookId = 'book-1';
 }
 
 @reflectiveTest
-class NoGlobalMutableStateAllowedTest extends FlutterArchAnalysisRuleTest {
+class NoGlobalMutableStateAllowedTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoGlobalMutableState();
@@ -58,7 +58,7 @@ final defaultBookId = String.fromEnvironment('DEFAULT_BOOK_ID');
 }
 
 @reflectiveTest
-class NoPublicTestMembersTest extends FlutterArchAnalysisRuleTest {
+class NoPublicTestMembersTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoPublicTestMembers();
@@ -86,7 +86,7 @@ void createBook() {}
 }
 
 @reflectiveTest
-class NoPublicTestMembersAllowedTest extends FlutterArchAnalysisRuleTest {
+class NoPublicTestMembersAllowedTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoPublicTestMembers();
@@ -113,7 +113,7 @@ void main() {
 }
 
 @reflectiveTest
-class NoEmptyTestGroupsTest extends FlutterArchAnalysisRuleTest {
+class NoEmptyTestGroupsTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoEmptyTestGroups();
@@ -145,7 +145,7 @@ void main() {
 }
 
 @reflectiveTest
-class NoEmptyTestGroupsAllowedTest extends FlutterArchAnalysisRuleTest {
+class NoEmptyTestGroupsAllowedTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoEmptyTestGroups();

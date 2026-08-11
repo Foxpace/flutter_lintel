@@ -1,13 +1,13 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:flutter_arch_guard/src/rules/behavior_rules.dart';
-import 'package:flutter_arch_guard/src/rules/safety_rules.dart';
+import 'package:lintel/src/rules/behavior_rules.dart';
+import 'package:lintel/src/rules/safety_rules.dart';
 import 'package:test_reflective_loader/test_reflective_loader.dart';
 
-import '../support/flutter_arch_analysis_rule_harness.dart';
+import '../support/lintel_analysis_rule_harness.dart';
 
 @reflectiveTest
-class CompositionRootResponsibilityTest extends FlutterArchAnalysisRuleTest {
+class CompositionRootResponsibilityTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = CompositionRootResponsibility();
@@ -34,7 +34,7 @@ class BooksRoot {
 }
 
 @reflectiveTest
-class WidgetDispatchesIntentsOnlyTest extends FlutterArchAnalysisRuleTest {
+class WidgetDispatchesIntentsOnlyTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = WidgetDispatchesIntentsOnly();
@@ -59,7 +59,7 @@ class BooksView { BooksCubit? cubit; }
 }
 
 @reflectiveTest
-class SingleOperationTryBlocksTest extends FlutterArchAnalysisRuleTest {
+class SingleOperationTryBlocksTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = SingleOperationTryBlocks();
@@ -91,7 +91,7 @@ void work() {
 }
 
 @reflectiveTest
-class NoCompatibilityShimsTest extends FlutterArchAnalysisRuleTest {
+class NoCompatibilityShimsTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoCompatibilityShims();
@@ -117,7 +117,7 @@ class NoCompatibilityShimsTest extends FlutterArchAnalysisRuleTest {
 }
 
 @reflectiveTest
-class AllowedMixinAndPartOfTest extends FlutterArchAnalysisRuleTest {
+class AllowedMixinAndPartOfTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoCompatibilityShims();
@@ -144,7 +144,7 @@ mixin SharedHelpers {}
 }
 
 @reflectiveTest
-class NoNonNullAssertionsTest extends FlutterArchAnalysisRuleTest {
+class NoNonNullAssertionsTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoNonNullAssertions();

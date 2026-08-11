@@ -1,12 +1,12 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:flutter_arch_guard/src/rules/bloc_specific_rules.dart';
+import 'package:lintel/src/rules/bloc_specific_rules.dart';
 import 'package:test_reflective_loader/test_reflective_loader.dart';
 
-import '../support/flutter_arch_analysis_rule_harness.dart';
+import '../support/lintel_analysis_rule_harness.dart';
 
 @reflectiveTest
-class BlocFieldsMustBePrivateTest extends FlutterArchAnalysisRuleTest {
+class BlocFieldsMustBePrivateTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = BlocFieldsMustBePrivate();
@@ -36,7 +36,7 @@ class CounterCubit extends Cubit<int> {
 }
 
 @reflectiveTest
-class NoBuildContextInBlocTest extends FlutterArchAnalysisRuleTest {
+class NoBuildContextInBlocTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoBuildContextInBloc();
@@ -68,7 +68,7 @@ class CounterCubit extends Cubit<CounterState> {
 }
 
 @reflectiveTest
-class EmitNewStateInstancesTest extends FlutterArchAnalysisRuleTest {
+class EmitNewStateInstancesTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = EmitNewStateInstances();
@@ -102,7 +102,7 @@ class CounterCubit extends Cubit<CounterState> {
 }
 
 @reflectiveTest
-class BlocStateMustUseStateSuffixTest extends FlutterArchAnalysisRuleTest {
+class BlocStateMustUseStateSuffixTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = BlocStateMustUseStateSuffix();
@@ -131,7 +131,7 @@ class CounterCubit extends Cubit<CounterData> {}
 }
 
 @reflectiveTest
-class NoBlocToBlocDependenciesTest extends FlutterArchAnalysisRuleTest {
+class NoBlocToBlocDependenciesTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoBlocToBlocDependencies();

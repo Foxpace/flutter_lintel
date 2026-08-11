@@ -1,25 +1,25 @@
 import 'package:analysis_server_plugin/plugin.dart';
 import 'package:analysis_server_plugin/registry.dart';
-import 'package:flutter_arch_guard/src/rules/behavior_rules.dart';
-import 'package:flutter_arch_guard/src/rules/bloc_specific_rules.dart';
-import 'package:flutter_arch_guard/src/rules/code_quality_rules.dart';
-import 'package:flutter_arch_guard/src/rules/common_correctness_rules.dart';
-import 'package:flutter_arch_guard/src/rules/common_safety_rules.dart';
-import 'package:flutter_arch_guard/src/rules/common_scope_rules.dart';
-import 'package:flutter_arch_guard/src/rules/data_rules.dart';
-import 'package:flutter_arch_guard/src/rules/dependency_rules.dart';
-import 'package:flutter_arch_guard/src/rules/maintainability_rules.dart';
-import 'package:flutter_arch_guard/src/rules/safety_rules.dart';
-import 'package:flutter_arch_guard/src/rules/structure_rules.dart';
-import 'package:flutter_arch_guard/src/rules/test_structure_rules.dart';
+import 'package:lintel/src/rules/behavior_rules.dart';
+import 'package:lintel/src/rules/bloc_specific_rules.dart';
+import 'package:lintel/src/rules/code_quality_rules.dart';
+import 'package:lintel/src/rules/common_correctness_rules.dart';
+import 'package:lintel/src/rules/common_safety_rules.dart';
+import 'package:lintel/src/rules/common_scope_rules.dart';
+import 'package:lintel/src/rules/data_rules.dart';
+import 'package:lintel/src/rules/dependency_rules.dart';
+import 'package:lintel/src/rules/maintainability_rules.dart';
+import 'package:lintel/src/rules/safety_rules.dart';
+import 'package:lintel/src/rules/structure_rules.dart';
+import 'package:lintel/src/rules/test_structure_rules.dart';
 
-/// Registers the Flutter Architecture Guard diagnostics with the analyzer.
-class FlutterArchGuardPlugin extends Plugin {
+/// Registers the Lintel diagnostics with the analyzer.
+class LintelPlugin extends Plugin {
   /// Creates the plugin registered by the analyzer entry point.
-  FlutterArchGuardPlugin();
+  LintelPlugin();
 
   @override
-  String get name => 'Flutter Architecture Guard';
+  String get name => 'Lintel';
 
   @override
   void register(PluginRegistry registry) {

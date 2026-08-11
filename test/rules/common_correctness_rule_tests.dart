@@ -1,12 +1,12 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:flutter_arch_guard/src/rules/common_correctness_rules.dart';
+import 'package:lintel/src/rules/common_correctness_rules.dart';
 import 'package:test_reflective_loader/test_reflective_loader.dart';
 
-import '../support/flutter_arch_analysis_rule_harness.dart';
+import '../support/lintel_analysis_rule_harness.dart';
 
 @reflectiveTest
-class NoAssignmentsInConditionsTest extends FlutterArchAnalysisRuleTest {
+class NoAssignmentsInConditionsTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoAssignmentsInConditions();
@@ -38,7 +38,7 @@ bool check(bool input) {
 }
 
 @reflectiveTest
-class CompleterErrorsNeedStackTraceTest extends FlutterArchAnalysisRuleTest {
+class CompleterErrorsNeedStackTraceTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = CompleterErrorsNeedStackTrace();
@@ -66,7 +66,7 @@ void fail() {
 }
 
 @reflectiveTest
-class PreferContainsKeyTest extends FlutterArchAnalysisRuleTest {
+class PreferContainsKeyTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = PreferContainsKey();

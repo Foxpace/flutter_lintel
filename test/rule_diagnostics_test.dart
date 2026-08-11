@@ -57,5 +57,5 @@ void main() {
       defineReflectiveTests(SingleOperationTryBlocksTest);
       defineCommonRuleGroups();
     }, name: 'Correctness, safety, and testing');
-  }, name: 'Flutter Architecture Guard');
+  }, name: 'Lintel');
 }

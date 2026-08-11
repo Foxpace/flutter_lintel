@@ -3,9 +3,9 @@ import 'package:analyzer/analysis_rule/rule_visitor_registry.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/error/error.dart';
-import 'package:flutter_arch_guard/src/rule_options.dart';
-import 'package:flutter_arch_guard/src/rule_utils.dart';
-import 'package:flutter_arch_guard/src/rules/base.dart';
+import 'package:lintel/src/rule_options.dart';
+import 'package:lintel/src/rule_utils.dart';
+import 'package:lintel/src/rules/base.dart';
 
 part 'test_structure_rule_support.dart';
 
