@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Tests: All",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "program": "test"
+    },
+    {
+      "name": "Tests: Diagnostic suite",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "program": "test/rule_diagnostics_test.dart"
+    },
+    {
+      "name": "Tests: Current file",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "program": "${file}",
+      "templateFor": "test"
+    }
+  ]
+}
