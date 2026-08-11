@@ -1,8 +1,8 @@
-# Flutter Architecture Guard
+# Lintel
 
 **Architecture rules that fail where developers can fix them: in the editor.**
 
-`flutter_arch_guard` is an analyzer plugin for Flutter projects that turns
+`lintel` is an analyzer plugin for Flutter projects that turns
 architecture decisions into diagnostics. It guards feature boundaries,
 dependency direction, Bloc and Cubit usage, immutable state, maintainability,
 correctness, and testing conventions.
@@ -26,7 +26,7 @@ tests that describe implementation instead of behavior.
 
 Standard Dart and Flutter lints are excellent at language and framework
 correctness, but they do not know the boundaries of your application.
-`flutter_arch_guard` fills that gap with diagnostics for decisions such as:
+`lintel` fills that gap with diagnostics for decisions such as:
 
 - widgets render state and dispatch intents;
 - Bloc and Cubit classes own state without depending on other state holders;
@@ -182,7 +182,7 @@ or workspace:
 
 ```yaml
 plugins:
-  flutter_arch_guard:
+  lintel:
     version: ^0.1.0
     diagnostics:
       cubit_state_ownership: true
@@ -205,8 +205,8 @@ path:
 
 ```yaml
 plugins:
-  flutter_arch_guard:
-    path: /absolute/path/to/flutter_arch_guard
+  lintel:
+    path: /absolute/path/to/lintel
 ```
 
 Restart the Dart analysis server after adding or changing the plugin.
@@ -214,7 +214,7 @@ Restart the Dart analysis server after adding or changing the plugin.
 Diagnostics are opt-in, so a team can start with a focused subset and add
 stricter architecture rules over time.
 Diagnostic IDs are concise because they are already scoped by the
-`flutter_arch_guard` plugin key; for example, use `feature_layout` rather than
+`lintel` plugin key; for example, use `feature_layout` rather than
 `flutter_arch_feature_layout`.
 
 ### Numeric limits
@@ -225,7 +225,7 @@ lines, and uninterrupted non-UI callable phases to 15 nonblank lines. Function
 and parameter limits are configurable too. Constructors are limited by
 parameter count rather than line count.
 
-Create an optional `flutter_arch_guard.yaml` at the package or workspace root
+Create an optional `lintel.yaml` at the package or workspace root
 to override any numeric threshold:
 
 ```yaml
@@ -249,7 +249,7 @@ changing the limits file.
 
 ```yaml
 plugins:
-  flutter_arch_guard:
+  lintel:
     version: ^0.1.0
     diagnostics:
       bloc_fields_must_be_private: true

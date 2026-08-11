@@ -2,7 +2,7 @@
 
 ## 0.1.0
 
-- Initial release of Flutter Architecture Guard.
+- Initial release of Lintel.
 - Add 41 opt-in analyzer diagnostics covering architecture boundaries,
   Bloc/Cubit usage, correctness, safety, testing, and maintainability.
 - Add configurable limits for file, class, callable, test, parameter-list, and

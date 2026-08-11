@@ -1,13 +1,13 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:flutter_arch_guard/src/rules/code_quality_rules.dart';
-import 'package:flutter_arch_guard/src/rules/dependency_rules.dart';
+import 'package:lintel/src/rules/code_quality_rules.dart';
+import 'package:lintel/src/rules/dependency_rules.dart';
 import 'package:test_reflective_loader/test_reflective_loader.dart';
 
-import '../support/flutter_arch_analysis_rule_harness.dart';
+import '../support/lintel_analysis_rule_harness.dart';
 
 @reflectiveTest
-class DependencyDirectionTest extends FlutterArchAnalysisRuleTest {
+class DependencyDirectionTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = DependencyDirection();
@@ -41,7 +41,7 @@ BookRepository? repository;
 }
 
 @reflectiveTest
-class LongParameterListTest extends FlutterArchAnalysisRuleTest {
+class LongParameterListTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = LongParameterList();
@@ -104,7 +104,7 @@ limits:
 }
 
 @reflectiveTest
-class SinglePublicDeclarationPerFileTest extends FlutterArchAnalysisRuleTest {
+class SinglePublicDeclarationPerFileTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = SinglePublicDeclarationPerFile();
@@ -130,7 +130,7 @@ class SinglePublicDeclarationPerFileTest extends FlutterArchAnalysisRuleTest {
 }
 
 @reflectiveTest
-class NoWidgetReturningHelpersTest extends FlutterArchAnalysisRuleTest {
+class NoWidgetReturningHelpersTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoWidgetReturningHelpers();

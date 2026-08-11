@@ -1,12 +1,12 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:flutter_arch_guard/src/rules/data_rules.dart';
+import 'package:lintel/src/rules/data_rules.dart';
 import 'package:test_reflective_loader/test_reflective_loader.dart';
 
-import '../support/flutter_arch_analysis_rule_harness.dart';
+import '../support/lintel_analysis_rule_harness.dart';
 
 @reflectiveTest
-class UseCaseUmbrellaTest extends FlutterArchAnalysisRuleTest {
+class UseCaseUmbrellaTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = UseCaseUmbrella();
@@ -40,7 +40,7 @@ class BookUseCases {
 }
 
 @reflectiveTest
-class StatelessApplicationServiceTest extends FlutterArchAnalysisRuleTest {
+class StatelessApplicationServiceTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = StatelessApplicationService();
@@ -73,7 +73,7 @@ class PlayerService {
 }
 
 @reflectiveTest
-class CubitStateOwnershipTest extends FlutterArchAnalysisRuleTest {
+class CubitStateOwnershipTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = CubitStateOwnership();
@@ -105,7 +105,7 @@ class BooksCubit extends Cubit<BooksState> {
 }
 
 @reflectiveTest
-class DataClassUsesFreezedTest extends FlutterArchAnalysisRuleTest {
+class DataClassUsesFreezedTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = DataClassUsesFreezed();
@@ -127,7 +127,7 @@ class DataClassUsesFreezedTest extends FlutterArchAnalysisRuleTest {
 }
 
 @reflectiveTest
-class CubitUsesOneUseCaseUmbrellaTest extends FlutterArchAnalysisRuleTest {
+class CubitUsesOneUseCaseUmbrellaTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = CubitUsesOneUseCaseUmbrella();

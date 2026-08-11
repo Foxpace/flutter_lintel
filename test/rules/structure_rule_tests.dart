@@ -1,12 +1,12 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:flutter_arch_guard/src/rules/structure_rules.dart';
+import 'package:lintel/src/rules/structure_rules.dart';
 import 'package:test_reflective_loader/test_reflective_loader.dart';
 
-import '../support/flutter_arch_analysis_rule_harness.dart';
+import '../support/lintel_analysis_rule_harness.dart';
 
 @reflectiveTest
-class RepositoryOwnershipTest extends FlutterArchAnalysisRuleTest {
+class RepositoryOwnershipTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = RepositoryOwnership();
@@ -35,7 +35,7 @@ class RepositoryOwnershipTest extends FlutterArchAnalysisRuleTest {
 }
 
 @reflectiveTest
-class SingleCubitCompositionRootTest extends FlutterArchAnalysisRuleTest {
+class SingleCubitCompositionRootTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = SingleCubitCompositionRoot();
@@ -57,7 +57,7 @@ class SingleCubitCompositionRootTest extends FlutterArchAnalysisRuleTest {
 }
 
 @reflectiveTest
-class WidgetFileCohesionTest extends FlutterArchAnalysisRuleTest {
+class WidgetFileCohesionTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = WidgetFileCohesion();

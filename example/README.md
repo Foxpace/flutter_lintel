@@ -1,11 +1,11 @@
-# Flutter Architecture Guard example
+# Lintel example
 
 Enable the plugin and the diagnostics that represent your architecture in the
 root `analysis_options.yaml`:
 
 ```yaml
 plugins:
-  flutter_arch_guard:
+  lintel:
     version: ^0.1.0
     diagnostics:
       cubit_state_ownership: true
@@ -40,7 +40,7 @@ class LibraryCubit extends Cubit<LibraryState> {
 ```
 
 Numeric thresholds have built-in defaults. To customize them, add an optional
-`flutter_arch_guard.yaml` next to `analysis_options.yaml`:
+`lintel.yaml` next to `analysis_options.yaml`:
 
 ```yaml
 limits:

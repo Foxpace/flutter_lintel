@@ -1,8 +1,8 @@
 import 'package:analyzer_testing/analysis_rule/analysis_rule.dart';
 
-abstract class FlutterArchAnalysisRuleTest extends AnalysisRuleTest {
+abstract class LintelAnalysisRuleTest extends AnalysisRuleTest {
   void givenGuardConfiguration(String source) {
-    newFile('$testPackageRootPath/flutter_arch_guard.yaml', source);
+    newFile('$testPackageRootPath/lintel.yaml', source);
   }
 
   String givenLibFile(String relativePath, String source) {

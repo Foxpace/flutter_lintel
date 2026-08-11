@@ -140,7 +140,7 @@ named method or collaborator.
 ## Configuring numeric limits
 
 All numeric thresholds can be overridden in an optional
-`flutter_arch_guard.yaml` at the package or workspace root:
+`lintel.yaml` at the package or workspace root:
 
 ```yaml
 limits:
@@ -160,4 +160,4 @@ Dart analysis server after changing the file.
 
 The analyzer's plugin configuration currently accepts only a plugin source
 and diagnostic enable/severity values, so numeric settings cannot live inside
-the `plugins.flutter_arch_guard` entry in `analysis_options.yaml`.
+the `plugins.lintel` entry in `analysis_options.yaml`.

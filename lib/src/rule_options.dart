@@ -2,7 +2,7 @@ import 'package:analyzer/analysis_rule/rule_context.dart';
 import 'package:analyzer/file_system/file_system.dart';
 import 'package:yaml/yaml.dart';
 
-const _configurationFileName = 'flutter_arch_guard.yaml';
+const _configurationFileName = 'lintel.yaml';
 
 /// Numeric thresholds used by architecture rules.
 final class RuleLimits {
@@ -30,7 +30,7 @@ final class RuleLimits {
     required this.testLines,
   });
 
-  /// Loads the nearest `flutter_arch_guard.yaml` above the current source.
+  /// Loads the nearest `lintel.yaml` above the current source.
   factory RuleLimits.fromContext(RuleContext context) {
     final sourceFile = context.currentUnit?.file;
     if (sourceFile == null) {

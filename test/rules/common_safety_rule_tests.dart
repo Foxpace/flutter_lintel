@@ -1,12 +1,12 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:flutter_arch_guard/src/rules/common_safety_rules.dart';
+import 'package:lintel/src/rules/common_safety_rules.dart';
 import 'package:test_reflective_loader/test_reflective_loader.dart';
 
-import '../support/flutter_arch_analysis_rule_harness.dart';
+import '../support/lintel_analysis_rule_harness.dart';
 
 @reflectiveTest
-class NoDynamicTest extends FlutterArchAnalysisRuleTest {
+class NoDynamicTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoDynamic();
@@ -34,7 +34,7 @@ Object? read(Map<String, dynamic> json) => json['value'];
 }
 
 @reflectiveTest
-class NoDynamicAllowedTest extends FlutterArchAnalysisRuleTest {
+class NoDynamicAllowedTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoDynamic();
@@ -58,7 +58,7 @@ Object? read(Map<String, Object?> json) => json['value'];
 }
 
 @reflectiveTest
-class NoSelfAssignmentTest extends FlutterArchAnalysisRuleTest {
+class NoSelfAssignmentTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoSelfAssignment();
@@ -88,7 +88,7 @@ void update(int value) {
 }
 
 @reflectiveTest
-class NoSelfAssignmentAllowedTest extends FlutterArchAnalysisRuleTest {
+class NoSelfAssignmentAllowedTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoSelfAssignment();
@@ -115,7 +115,7 @@ int update(int current, int requested) {
 }
 
 @reflectiveTest
-class NoSelfComparisonTest extends FlutterArchAnalysisRuleTest {
+class NoSelfComparisonTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoSelfComparison();
@@ -143,7 +143,7 @@ bool unchanged(int value) => value == value;
 }
 
 @reflectiveTest
-class NoSelfComparisonAllowedTest extends FlutterArchAnalysisRuleTest {
+class NoSelfComparisonAllowedTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoSelfComparison();
@@ -167,7 +167,7 @@ bool changed(int current, int requested) => current != requested;
 }
 
 @reflectiveTest
-class NoEnumValuesByIndexTest extends FlutterArchAnalysisRuleTest {
+class NoEnumValuesByIndexTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoEnumValuesByIndex();
@@ -193,7 +193,7 @@ BookFormat decode(int index) => BookFormat.values[index];
 }
 
 @reflectiveTest
-class NoEnumValuesByIndexAllowedTest extends FlutterArchAnalysisRuleTest {
+class NoEnumValuesByIndexAllowedTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoEnumValuesByIndex();
@@ -219,7 +219,7 @@ BookFormat get defaultFormat => BookFormat.epub;
 }
 
 @reflectiveTest
-class NoOneFieldRecordsTest extends FlutterArchAnalysisRuleTest {
+class NoOneFieldRecordsTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoOneFieldRecords();
@@ -247,7 +247,7 @@ class NoOneFieldRecordsTest extends FlutterArchAnalysisRuleTest {
 }
 
 @reflectiveTest
-class NoOneFieldRecordsAllowedTest extends FlutterArchAnalysisRuleTest {
+class NoOneFieldRecordsAllowedTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {
     rule = NoOneFieldRecords();

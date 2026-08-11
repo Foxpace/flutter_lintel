@@ -1,6 +1,6 @@
 # Flutter architecture rule guide
 
-This guide describes every diagnostic registered by `flutter_arch_guard`.
+This guide describes every diagnostic registered by `lintel`.
 “Bad” examples produce the named diagnostic; “good” examples show the intended
 direction. Generated files (`*.g.dart`, `*.freezed.dart`, `*.config.dart`, and
 `*.gr.dart`) are ignored where a rule targets handwritten source.
