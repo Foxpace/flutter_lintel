@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2
+
+- Fix the default top-level function limit to 30 lines so it matches the
+  non-`build` method limit.
+- Add boundary coverage for top-level functions at and above the default
+  limit.
+
 ## 0.1.1
 
 - Improve automated publishing with main-branch ancestry and release-version
