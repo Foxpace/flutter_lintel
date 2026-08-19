@@ -165,6 +165,8 @@ The full profile guides projects toward these boundaries:
   instances are new, and state holders do not depend on each other.
 - Application and domain code depend on contracts. Data adapters and platform
   packages remain outside presentation.
+- Application modules expose behavior, hide collaborators, and earn their
+  boundary through coordination, policy, translation, or result construction.
 - Data-only values use Freezed. Files, declarations, parameter lists,
   callables, and error boundaries remain deliberately small.
 - Blocs and Cubits may use mixins for cross-cutting concerns such as logging,
@@ -246,13 +248,15 @@ for scope and fallback behavior. Restart the Dart analysis server after
 changing the limits file.
 
 <details>
-<summary>Complete configuration for all 41 diagnostics</summary>
+<summary>Complete configuration for all 42 diagnostics</summary>
 
 ```yaml
 plugins:
   lintel:
     version: ^0.1.0
     diagnostics:
+      application_module_hides_collaborators: true
+      avoid_trivial_application_modules: true
       bloc_fields_must_be_private: true
       bloc_state_must_use_state_suffix: true
       completer_errors_need_stack_trace: true
@@ -290,7 +294,6 @@ plugins:
       test_descriptions_use_given_when_then: true
       test_groups_describe_intention: true
       test_line_count: true
-      use_case_umbrella: true
       visual_grouping: true
       widget_dispatches_intents_only: true
       widget_file_cohesion: true

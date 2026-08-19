@@ -158,35 +158,79 @@ class SavePlaybackUseCase {
 Application services execute behavior; the Cubit state remains the source of
 truth for mutable feature data.
 
-## `use_case_umbrella`
+## `application_module_hides_collaborators`
 
-What it catches: public instance fields on a class ending in `UseCases` whose
-declared type does not end in `UseCase` or `UseCases`.
+What it catches: public instance fields on application classes under
+`use_cases/`. Application classes end in `UseCase`, `UseCases`, `Workflow`,
+`Coordinator`, or `Application`.
 
 Bad:
 
 ```dart
-class LibraryUseCases {
+class LibraryApplication {
   final BookRepository repository;
-  final FilePicker picker;
 
-  const LibraryUseCases(this.repository, this.picker);
+  const LibraryApplication(this.repository);
 }
 ```
 
 Good:
 
 ```dart
-class LibraryUseCases {
-  final LoadLibraryUseCase loadLibrary;
-  final ImportBookUseCase importBook;
+class LibraryApplication {
+  const LibraryApplication(this._repository);
 
-  const LibraryUseCases(this.loadLibrary, this.importBook);
+  final BookRepository _repository;
+
+  Future<List<Book>> loadLibrary() => _repository.loadBooks();
 }
 ```
 
-The umbrella should describe user actions rather than expose infrastructure to
-the Cubit.
+The public interface describes behavior. Repositories, policies, services, and
+other collaborators remain implementation details.
+
+## `avoid_trivial_application_modules`
+
+What it catches: a concrete application class under `use_cases/` when every
+public operation only forwards unchanged arguments to a private collaborator.
+The rule evaluates the class as a whole, so a useful module may still contain
+an occasional pass-through operation.
+
+Bad:
+
+```dart
+class SaveThemeUseCase {
+  const SaveThemeUseCase(this._repository);
+
+  final SettingsRepository _repository;
+
+  Future<void> run(AppTheme theme) => _repository.saveTheme(theme);
+}
+```
+
+Good:
+
+```dart
+class SettingsApplication {
+  const SettingsApplication(this._repository);
+
+  final SettingsRepository _repository;
+
+  Future<SettingsSnapshot> load() async {
+    final (theme, playback) = await (
+      _repository.loadTheme(),
+      _repository.loadPlayback(),
+    ).wait;
+    return SettingsSnapshot(theme: theme, playback: playback);
+  }
+
+  Future<void> changeTheme(AppTheme theme) => _repository.saveTheme(theme);
+}
+```
+
+Validation, branching, coordination, failure translation, result construction,
+argument transformation, and delegation to private behavior all provide depth.
+Abstract contracts, overrides, generated code, and test sources are ignored.
 
 ## `widget_dispatches_intents_only`
 
@@ -236,4 +280,3 @@ class LibraryScreen extends StatelessWidget {
 
 Bloc subscription, navigation, and dependency resolution belong in the
 feature root. Leaf widgets receive state and emit typed intents.
-

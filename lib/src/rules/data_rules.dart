@@ -6,56 +6,6 @@ import 'package:analyzer/error/error.dart';
 import 'package:lintel/src/rule_utils.dart';
 import 'package:lintel/src/rules/base.dart';
 
-/// Reports `UseCases` umbrellas that expose raw collaborators.
-///
-/// See the [rule documentation](../../../doc/rules/state-intents-and-application.md#use_case_umbrella).
-class UseCaseUmbrella extends GuardRule {
-  static final LintCode code = warningCode(
-    'use_case_umbrella',
-    'A UseCases umbrella may expose only explicitly named UseCase collaborators.',
-    'Wrap this capability in a user-action UseCase or a smaller cohesive UseCases group.',
-  );
-
-  UseCaseUmbrella()
-    : super(code.name, 'Keeps Cubit application APIs explicit and cohesive.');
-
-  @override
-  LintCode get diagnosticCode => code;
-
-  @override
-  void registerNodeProcessors(
-    RuleVisitorRegistry registry,
-    RuleContext context,
-  ) => registry.addFieldDeclaration(this, _UmbrellaFieldVisitor(this, context));
-}
-
-class _UmbrellaFieldVisitor extends SimpleAstVisitor<void> {
-  _UmbrellaFieldVisitor(this.rule, this.context);
-  final UseCaseUmbrella rule;
-  final RuleContext context;
-
-  @override
-  void visitFieldDeclaration(FieldDeclaration node) {
-    final path = currentPath(context);
-    final parent = enclosingClass(node);
-    if (path == null ||
-        !path.startsWith('lib/') ||
-        parent == null ||
-        !parent.namePart.beginToken.lexeme.endsWith('UseCases')) {
-      return;
-    }
-    final type = node.fields.type?.toSource() ?? '';
-    final exposesPublic = node.fields.variables.any(
-      (variable) => !variable.name.lexeme.startsWith('_'),
-    );
-    if (exposesPublic &&
-        !type.endsWith('UseCase') &&
-        !type.endsWith('UseCases')) {
-      rule.reportAtNode(node.fields);
-    }
-  }
-}
-
 /// Reports mutable state retained by application services in `use_cases/`.
 ///
 /// See the [rule documentation](../../../doc/rules/state-intents-and-application.md#stateless_application_service).

@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Replace `use_case_umbrella` with depth-based application-module rules that
+  hide collaborators and reject APIs made entirely of unchanged forwarding.
+
 ## 0.1.5
 
 - Exempt multiline expression-bodied functions and methods from

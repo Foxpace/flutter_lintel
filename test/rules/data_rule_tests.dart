@@ -6,40 +6,6 @@ import 'package:test_reflective_loader/test_reflective_loader.dart';
 import '../support/lintel_analysis_rule_harness.dart';
 
 @reflectiveTest
-class UseCaseUmbrellaTest extends LintelAnalysisRuleTest {
-  @override
-  void setUp() {
-    rule = UseCaseUmbrella();
-    super.setUp();
-  }
-
-  Future<void>
-  test_givenRawServiceExposure_whenAnalyzed_thenReportsDiagnostic() async {
-    // GIVEN
-    const source = '''
-class SyncService {}
-class BookUseCases {
-  final SyncService helper = SyncService();
-}
-''';
-    final path = givenLibFile(
-      'features/books/use_cases/book_use_cases.dart',
-      source,
-    );
-
-    // WHEN
-    const field = 'final SyncService helper = SyncService()';
-
-    // THEN
-    await thenReportsLint(
-      path,
-      offset: source.indexOf(field),
-      length: field.length,
-    );
-  }
-}
-
-@reflectiveTest
 class StatelessApplicationServiceTest extends LintelAnalysisRuleTest {
   @override
   void setUp() {

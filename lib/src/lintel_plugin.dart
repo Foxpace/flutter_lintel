@@ -1,5 +1,6 @@
 import 'package:analysis_server_plugin/plugin.dart';
 import 'package:analysis_server_plugin/registry.dart';
+import 'package:lintel/src/rules/application_module_rules.dart';
 import 'package:lintel/src/rules/behavior_rules.dart';
 import 'package:lintel/src/rules/bloc_specific_rules.dart';
 import 'package:lintel/src/rules/code_quality_rules.dart';
@@ -27,7 +28,8 @@ class LintelPlugin extends Plugin {
       ..registerLintRule(FeatureLayout())
       ..registerLintRule(RepositoryOwnership())
       ..registerLintRule(SingleCubitCompositionRoot())
-      ..registerLintRule(UseCaseUmbrella())
+      ..registerLintRule(ApplicationModuleHidesCollaborators())
+      ..registerLintRule(AvoidTrivialApplicationModules())
       ..registerLintRule(TestBodyUsesGivenWhenThenComments())
       ..registerLintRule(TestDescriptionsUseGivenWhenThen())
       ..registerLintRule(TestGroupsDescribeIntention())
