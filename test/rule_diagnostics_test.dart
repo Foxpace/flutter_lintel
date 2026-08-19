@@ -1,5 +1,6 @@
 import 'package:test_reflective_loader/test_reflective_loader.dart';
 
+import 'rules/application_module_rule_tests.dart';
 import 'rules/behavior_rule_tests.dart';
 import 'rules/bloc_specific_rule_tests.dart';
 import 'rules/boundary_quality_rule_tests.dart';
@@ -21,11 +22,12 @@ void main() {
     }, name: 'Structure and ownership');
 
     defineReflectiveSuite(() {
+      defineReflectiveTests(ApplicationModuleHidesCollaboratorsTest);
+      defineReflectiveTests(AvoidTrivialApplicationModulesTest);
       defineReflectiveTests(CompositionRootResponsibilityTest);
       defineReflectiveTests(CubitStateOwnershipTest);
       defineReflectiveTests(CubitUsesOneUseCaseUmbrellaTest);
       defineReflectiveTests(StatelessApplicationServiceTest);
-      defineReflectiveTests(UseCaseUmbrellaTest);
       defineReflectiveTests(WidgetDispatchesIntentsOnlyTest);
     }, name: 'State, intents, and application behavior');
 

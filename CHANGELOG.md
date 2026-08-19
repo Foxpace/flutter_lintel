@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.6
+
+- Add `application_module_hides_collaborators` to reject public instance fields
+  that expose an application module's dependencies.
+- Add `avoid_trivial_application_modules` to reject modules whose public
+  operations only forward unchanged arguments to private collaborators.
+- Remove `use_case_umbrella` in favor of the two depth-based rules.
+- Document the exact scope, exemptions, and intended fixes for both new
+  application-module diagnostics.
+
 ## 0.1.5
 
 - Exempt multiline expression-bodied functions and methods from

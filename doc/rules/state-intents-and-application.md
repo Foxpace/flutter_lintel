@@ -158,35 +158,118 @@ class SavePlaybackUseCase {
 Application services execute behavior; the Cubit state remains the source of
 truth for mutable feature data.
 
-## `use_case_umbrella`
+## `application_module_hides_collaborators`
 
-What it catches: public instance fields on a class ending in `UseCases` whose
-declared type does not end in `UseCase` or `UseCases`.
+What it catches: public instance fields on application classes in handwritten
+`lib/**/use_cases/**.dart` files. An application class is any class whose name
+ends in `UseCase`, `UseCases`, `Workflow`, `Coordinator`, or `Application`.
+Static fields do not define per-instance collaborators, so this rule ignores
+them.
+
+A public field makes the wrapped dependency part of the module's API. Callers
+can then skip the module's policy and call the repository or service directly.
+The field also makes it harder to replace that collaborator without changing
+every caller. Keep instance fields private and expose operations named in the
+language of the application.
 
 Bad:
 
 ```dart
-class LibraryUseCases {
+class LibraryApplication {
   final BookRepository repository;
-  final FilePicker picker;
 
-  const LibraryUseCases(this.repository, this.picker);
+  const LibraryApplication(this.repository);
 }
 ```
 
 Good:
 
 ```dart
-class LibraryUseCases {
-  final LoadLibraryUseCase loadLibrary;
-  final ImportBookUseCase importBook;
+class LibraryApplication {
+  const LibraryApplication(this._repository);
 
-  const LibraryUseCases(this.loadLibrary, this.importBook);
+  final BookRepository _repository;
+
+  Future<List<Book>> loadLibrary() => _repository.loadBooks();
 }
 ```
 
-The umbrella should describe user actions rather than expose infrastructure to
-the Cubit.
+The public interface describes behavior. Repositories, policies, services, and
+other collaborators remain implementation details.
+
+This rule checks visibility, not the declared type. It reports any public
+instance field because even a harmless-looking value can become an alternate
+path around the behavior API. Generated files and test sources are ignored.
+
+If a class has no policy, coordination, or translation to protect, remove the
+wrapper and inject its contract directly. A private field plus a one-to-one
+forwarding method only hides the dependency syntactically; the next rule
+catches modules made entirely of that pattern.
+
+## `avoid_trivial_application_modules`
+
+What it catches: a concrete application class in handwritten
+`lib/**/use_cases/**.dart` code when every eligible public operation only
+forwards unchanged arguments to a private collaborator. It recognizes both
+expression bodies and one-statement bodies, with or without `return` or
+`await`.
+
+The diagnostic requires all of these conditions:
+
+- the class name ends in `UseCase`, `UseCases`, `Workflow`, `Coordinator`, or
+  `Application`;
+- the class has at least one private instance field and one public operation;
+- every public operation consists of one call to a private field;
+- positional and named arguments pass through unchanged.
+
+The rule evaluates the class as a whole. One operation that coordinates work,
+checks policy, transforms data, or delegates to private behavior gives the
+module a reason to exist, even when another operation is a simple pass-through.
+
+Bad:
+
+```dart
+class SaveThemeUseCase {
+  const SaveThemeUseCase(this._repository);
+
+  final SettingsRepository _repository;
+
+  Future<void> run(AppTheme theme) => _repository.saveTheme(theme);
+}
+```
+
+Good:
+
+```dart
+class SettingsApplication {
+  const SettingsApplication(this._repository);
+
+  final SettingsRepository _repository;
+
+  Future<SettingsSnapshot> load() async {
+    final (theme, playback) = await (
+      _repository.loadTheme(),
+      _repository.loadPlayback(),
+    ).wait;
+    return SettingsSnapshot(theme: theme, playback: playback);
+  }
+
+  Future<void> changeTheme(AppTheme theme) => _repository.saveTheme(theme);
+}
+```
+
+Validation, branching, coordination, failure translation, result construction,
+argument transformation, and delegation to private behavior all provide depth.
+The rule does not prescribe how much of that work a class needs. It only
+rejects a class whose complete public behavior API is an unchanged relay.
+
+Abstract contracts and `@override` methods may legitimately mirror another
+API, so they are ignored. Static methods, getters, setters, operators, private
+methods, generated code, and test sources are also outside this check.
+
+To fix the diagnostic, either move real application behavior into the module
+or delete the wrapper and inject the underlying contract. Renaming a repository
+method without changing its behavior does not create an application boundary.
 
 ## `widget_dispatches_intents_only`
 
@@ -236,4 +319,3 @@ class LibraryScreen extends StatelessWidget {
 
 Bloc subscription, navigation, and dependency resolution belong in the
 feature root. Leaf widgets receive state and emit typed intents.
-
