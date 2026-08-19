@@ -21,8 +21,8 @@ architecture profile and use package-specific diagnostics.
 
 | Diagnostic | What it catches |
 | --- | --- |
-| [`application_module_hides_collaborators`](rules/state-intents-and-application.md#application_module_hides_collaborators) | Public collaborators exposed by application modules. |
-| [`avoid_trivial_application_modules`](rules/state-intents-and-application.md#avoid_trivial_application_modules) | Application modules whose entire public API only forwards unchanged calls. |
+| [`application_module_hides_collaborators`](rules/state-intents-and-application.md#application_module_hides_collaborators) | Public instance fields on application classes under `use_cases/`, which let callers bypass the module's behavior API. |
+| [`avoid_trivial_application_modules`](rules/state-intents-and-application.md#avoid_trivial_application_modules) | Concrete application classes whose public operations all pass the same arguments straight to private collaborators. |
 | [`bloc_fields_must_be_private`](rules/bloc-and-cubit.md#bloc_fields_must_be_private) | Public instance fields declared by a Bloc or Cubit. |
 | [`bloc_state_must_use_state_suffix`](rules/bloc-and-cubit.md#bloc_state_must_use_state_suffix) | Bloc or Cubit state types without a `State` suffix. |
 | [`completer_errors_need_stack_trace`](rules/testing-errors-and-correctness.md#completer_errors_need_stack_trace) | `completeError` calls without a stack trace argument. |

@@ -23,7 +23,10 @@ class ApplicationModuleHidesCollaborators extends GuardRule {
   );
 
   ApplicationModuleHidesCollaborators()
-    : super(code.name, 'Keeps application interfaces behavior-oriented.');
+    : super(
+        code.name,
+        'Keeps application collaborators behind behavior-oriented methods.',
+      );
 
   @override
   LintCode get diagnosticCode => code;
@@ -68,7 +71,10 @@ class AvoidTrivialApplicationModules extends GuardRule {
   );
 
   AvoidTrivialApplicationModules()
-    : super(code.name, 'Requires application modules to provide useful depth.');
+    : super(
+        code.name,
+        'Rejects application APIs made entirely of unchanged forwarding.',
+      );
 
   @override
   LintCode get diagnosticCode => code;

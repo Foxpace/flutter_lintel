@@ -185,7 +185,7 @@ or workspace:
 ```yaml
 plugins:
   lintel:
-    version: ^0.1.0
+    version: ^0.1.6
     diagnostics:
       cubit_state_ownership: true
       dependency_direction: true
@@ -253,7 +253,7 @@ changing the limits file.
 ```yaml
 plugins:
   lintel:
-    version: ^0.1.0
+    version: ^0.1.6
     diagnostics:
       application_module_hides_collaborators: true
       avoid_trivial_application_modules: true
